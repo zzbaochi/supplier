@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geely.project.supplier.mapper.BCallPositionMapper">
+    
+    <resultMap type="BCallPosition" id="BCallPositionResult">
+        <result property="cId"    column="c_id"    />
+        <result property="uId"    column="u_id"    />
+        <result property="exportDep"    column="export_dep"    />
+        <result property="entryDep"    column="entry_dep"    />
+        <result property="projectTeam"    column="project_team"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="bidSection"    column="bid_section"    />
+        <result property="evaLevel"    column="eva_level"    />
+        <result property="isCard"    column="is_card"    />
+        <result property="isCaliche"    column="is_caliche"    />
+        <result property="computerType"    column="computer_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBCallPositionVo">
+        select c_id, u_id, export_dep, entry_dep, project_team, project_name, bid_section, eva_level, is_card, is_caliche, computer_type, create_time, update_time, create_by, update_by, remark from b_call_position
+    </sql>
+
+    <select id="selectBCallPositionList" parameterType="BCallPosition" resultMap="BCallPositionResult">
+        <include refid="selectBCallPositionVo"/>
+        <where>  
+            <if test="uId != null  and uId != ''"> and u_id = #{uId}</if>
+            <if test="exportDep != null  and exportDep != ''"> and export_dep = #{exportDep}</if>
+            <if test="entryDep != null  and entryDep != ''"> and entry_dep = #{entryDep}</if>
+            <if test="projectTeam != null  and projectTeam != ''"> and project_team = #{projectTeam}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="bidSection != null  and bidSection != ''"> and bid_section = #{bidSection}</if>
+            <if test="evaLevel != null  and evaLevel != ''"> and eva_level = #{evaLevel}</if>
+            <if test="isCard != null  and isCard != ''"> and is_card = #{isCard}</if>
+            <if test="isCaliche != null  and isCaliche != ''"> and is_caliche = #{isCaliche}</if>
+            <if test="computerType != null  and computerType != ''"> and computer_type = #{computerType}</if>
+        </where>
+    </select>
+    
+    <select id="selectBCallPositionById" parameterType="String" resultMap="BCallPositionResult">
+        <include refid="selectBCallPositionVo"/>
+        where c_id = #{cId}
+    </select>
+        
+    <insert id="insertBCallPosition" parameterType="BCallPosition">
+        insert into b_call_position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null  and cId != ''">c_id,</if>
+            <if test="uId != null  and uId != ''">u_id,</if>
+            <if test="exportDep != null  and exportDep != ''">export_dep,</if>
+            <if test="entryDep != null  and entryDep != ''">entry_dep,</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team,</if>
+            <if test="projectName != null  and projectName != ''">project_name,</if>
+            <if test="bidSection != null  and bidSection != ''">bid_section,</if>
+            <if test="evaLevel != null  and evaLevel != ''">eva_level,</if>
+            <if test="isCard != null  and isCard != ''">is_card,</if>
+            <if test="isCaliche != null  and isCaliche != ''">is_caliche,</if>
+            <if test="computerType != null  and computerType != ''">computer_type,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null  and cId != ''">#{cId},</if>
+            <if test="uId != null  and uId != ''">#{uId},</if>
+            <if test="exportDep != null  and exportDep != ''">#{exportDep},</if>
+            <if test="entryDep != null  and entryDep != ''">#{entryDep},</if>
+            <if test="projectTeam != null  and projectTeam != ''">#{projectTeam},</if>
+            <if test="projectName != null  and projectName != ''">#{projectName},</if>
+            <if test="bidSection != null  and bidSection != ''">#{bidSection},</if>
+            <if test="evaLevel != null  and evaLevel != ''">#{evaLevel},</if>
+            <if test="isCard != null  and isCard != ''">#{isCard},</if>
+            <if test="isCaliche != null  and isCaliche != ''">#{isCaliche},</if>
+            <if test="computerType != null  and computerType != ''">#{computerType},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBCallPosition" parameterType="BCallPosition">
+        update b_call_position
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uId != null  and uId != ''">u_id = #{uId},</if>
+            <if test="exportDep != null  and exportDep != ''">export_dep = #{exportDep},</if>
+            <if test="entryDep != null  and entryDep != ''">entry_dep = #{entryDep},</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team = #{projectTeam},</if>
+            <if test="projectName != null  and projectName != ''">project_name = #{projectName},</if>
+            <if test="bidSection != null  and bidSection != ''">bid_section = #{bidSection},</if>
+            <if test="evaLevel != null  and evaLevel != ''">eva_level = #{evaLevel},</if>
+            <if test="isCard != null  and isCard != ''">is_card = #{isCard},</if>
+            <if test="isCaliche != null  and isCaliche != ''">is_caliche = #{isCaliche},</if>
+            <if test="computerType != null  and computerType != ''">computer_type = #{computerType},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where c_id = #{cId}
+    </update>
+
+    <delete id="deleteBCallPositionById" parameterType="String">
+        delete from b_call_position where c_id = #{cId}
+    </delete>
+
+    <delete id="deleteBCallPositionByIds" parameterType="String">
+        delete from b_call_position where c_id in 
+        <foreach item="cId" collection="array" open="(" separator="," close=")">
+            #{cId}
+        </foreach>
+    </delete>
+    
+</mapper>

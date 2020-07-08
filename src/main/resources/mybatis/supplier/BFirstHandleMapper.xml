@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geely.project.supplier.mapper.BFirstHandleMapper">
+    
+    <resultMap type="BFirstHandle" id="BFirstHandleResult">
+        <result property="hId"    column="h_id"    />
+        <result property="uId"    column="u_id"    />
+        <result property="department"    column="department"    />
+        <result property="projectTeam"    column="project_team"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="isCard"    column="is_card"    />
+        <result property="isCaliche"    column="is_caliche"    />
+        <result property="computerType"    column="computer_type"    />
+        <result property="bidSection"    column="bid_section"    />
+        <result property="evaLevel"    column="eva_level"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBFirstHandleVo">
+        select h_id, u_id, department, project_team, project_name, is_card, is_caliche, computer_type, bid_section, eva_level, create_time, update_time, create_by, update_by, remark from b_first_handle
+    </sql>
+
+    <select id="selectBFirstHandleList" parameterType="BFirstHandle" resultMap="BFirstHandleResult">
+        <include refid="selectBFirstHandleVo"/>
+        <where>  
+            <if test="uId != null  and uId != ''"> and u_id = #{uId}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="projectTeam != null  and projectTeam != ''"> and project_team = #{projectTeam}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="isCard != null  and isCard != ''"> and is_card = #{isCard}</if>
+            <if test="isCaliche != null  and isCaliche != ''"> and is_caliche = #{isCaliche}</if>
+            <if test="computerType != null  and computerType != ''"> and computer_type = #{computerType}</if>
+            <if test="bidSection != null  and bidSection != ''"> and bid_section = #{bidSection}</if>
+            <if test="evaLevel != null  and evaLevel != ''"> and eva_level = #{evaLevel}</if>
+        </where>
+    </select>
+    
+    <select id="selectBFirstHandleById" parameterType="String" resultMap="BFirstHandleResult">
+        <include refid="selectBFirstHandleVo"/>
+        where h_id = #{hId}
+    </select>
+        
+    <insert id="insertBFirstHandle" parameterType="BFirstHandle">
+        insert into b_first_handle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hId != null  and hId != ''">h_id,</if>
+            <if test="uId != null  and uId != ''">u_id,</if>
+            <if test="department != null  and department != ''">department,</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team,</if>
+            <if test="projectName != null  and projectName != ''">project_name,</if>
+            <if test="isCard != null  and isCard != ''">is_card,</if>
+            <if test="isCaliche != null  and isCaliche != ''">is_caliche,</if>
+            <if test="computerType != null  and computerType != ''">computer_type,</if>
+            <if test="bidSection != null  and bidSection != ''">bid_section,</if>
+            <if test="evaLevel != null  and evaLevel != ''">eva_level,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hId != null  and hId != ''">#{hId},</if>
+            <if test="uId != null  and uId != ''">#{uId},</if>
+            <if test="department != null  and department != ''">#{department},</if>
+            <if test="projectTeam != null  and projectTeam != ''">#{projectTeam},</if>
+            <if test="projectName != null  and projectName != ''">#{projectName},</if>
+            <if test="isCard != null  and isCard != ''">#{isCard},</if>
+            <if test="isCaliche != null  and isCaliche != ''">#{isCaliche},</if>
+            <if test="computerType != null  and computerType != ''">#{computerType},</if>
+            <if test="bidSection != null  and bidSection != ''">#{bidSection},</if>
+            <if test="evaLevel != null  and evaLevel != ''">#{evaLevel},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBFirstHandle" parameterType="BFirstHandle">
+        update b_first_handle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uId != null  and uId != ''">u_id = #{uId},</if>
+            <if test="department != null  and department != ''">department = #{department},</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team = #{projectTeam},</if>
+            <if test="projectName != null  and projectName != ''">project_name = #{projectName},</if>
+            <if test="isCard != null  and isCard != ''">is_card = #{isCard},</if>
+            <if test="isCaliche != null  and isCaliche != ''">is_caliche = #{isCaliche},</if>
+            <if test="computerType != null  and computerType != ''">computer_type = #{computerType},</if>
+            <if test="bidSection != null  and bidSection != ''">bid_section = #{bidSection},</if>
+            <if test="evaLevel != null  and evaLevel != ''">eva_level = #{evaLevel},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where h_id = #{hId}
+    </update>
+
+    <delete id="deleteBFirstHandleById" parameterType="String">
+        delete from b_first_handle where h_id = #{hId}
+    </delete>
+
+    <delete id="deleteBFirstHandleByIds" parameterType="String">
+        delete from b_first_handle where h_id in 
+        <foreach item="hId" collection="array" open="(" separator="," close=")">
+            #{hId}
+        </foreach>
+    </delete>
+
+    <update id="updateBFirstHandleByUid" parameterType="BFirstHandle">
+        update b_first_handle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="department != null  and department != ''">department = #{department},</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team = #{projectTeam},</if>
+            <if test="projectName != null  and projectName != ''">project_name = #{projectName},</if>
+            <if test="isCard != null  and isCard != ''">is_card = #{isCard},</if>
+            <if test="isCaliche != null  and isCaliche != ''">is_caliche = #{isCaliche},</if>
+            <if test="computerType != null  and computerType != ''">computer_type = #{computerType},</if>
+            <if test="bidSection != null  and bidSection != ''">bid_section = #{bidSection},</if>
+            <if test="evaLevel != null  and evaLevel != ''">eva_level = #{evaLevel},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where u_id = #{uId}
+    </update>
+    
+</mapper>

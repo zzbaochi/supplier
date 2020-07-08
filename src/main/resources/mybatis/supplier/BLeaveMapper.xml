@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geely.project.supplier.mapper.BLeaveMapper">
+    
+    <resultMap type="BLeave" id="BLeaveResult">
+        <result property="cId"    column="c_id"    />
+        <result property="uId"    column="u_id"    />
+        <result property="isDeposit"    column="is_deposit"    />
+        <result property="depositName"    column="deposit_name"    />
+        <result property="accountName"    column="account_name"    />
+        <result property="accountCard"    column="account_card"    />
+        <result property="paymentName"    column="payment_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBLeaveVo">
+        select c_id, u_id, is_deposit, deposit_name, account_name, account_card, payment_name, create_time, update_time, create_by, update_by, remark from b_leave
+    </sql>
+
+    <select id="selectBLeaveList" parameterType="BLeave" resultMap="BLeaveResult">
+        <include refid="selectBLeaveVo"/>
+        <where>  
+            <if test="uId != null  and uId != ''"> and u_id = #{uId}</if>
+            <if test="isDeposit != null  and isDeposit != ''"> and is_deposit = #{isDeposit}</if>
+            <if test="depositName != null  and depositName != ''"> and deposit_name like concat('%', #{depositName}, '%')</if>
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="accountCard != null  and accountCard != ''"> and account_card = #{accountCard}</if>
+            <if test="paymentName != null  and paymentName != ''"> and payment_name like concat('%', #{paymentName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBLeaveById" parameterType="String" resultMap="BLeaveResult">
+        <include refid="selectBLeaveVo"/>
+        where c_id = #{cId}
+    </select>
+        
+    <insert id="insertBLeave" parameterType="BLeave">
+        insert into b_leave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null  and cId != ''">c_id,</if>
+            <if test="uId != null  and uId != ''">u_id,</if>
+            <if test="isDeposit != null  and isDeposit != ''">is_deposit,</if>
+            <if test="depositName != null  and depositName != ''">deposit_name,</if>
+            <if test="accountName != null  and accountName != ''">account_name,</if>
+            <if test="accountCard != null  and accountCard != ''">account_card,</if>
+            <if test="paymentName != null  and paymentName != ''">payment_name,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null  and cId != ''">#{cId},</if>
+            <if test="uId != null  and uId != ''">#{uId},</if>
+            <if test="isDeposit != null  and isDeposit != ''">#{isDeposit},</if>
+            <if test="depositName != null  and depositName != ''">#{depositName},</if>
+            <if test="accountName != null  and accountName != ''">#{accountName},</if>
+            <if test="accountCard != null  and accountCard != ''">#{accountCard},</if>
+            <if test="paymentName != null  and paymentName != ''">#{paymentName},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBLeave" parameterType="BLeave">
+        update b_leave
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uId != null  and uId != ''">u_id = #{uId},</if>
+            <if test="isDeposit != null  and isDeposit != ''">is_deposit = #{isDeposit},</if>
+            <if test="depositName != null  and depositName != ''">deposit_name = #{depositName},</if>
+            <if test="accountName != null  and accountName != ''">account_name = #{accountName},</if>
+            <if test="accountCard != null  and accountCard != ''">account_card = #{accountCard},</if>
+            <if test="paymentName != null  and paymentName != ''">payment_name = #{paymentName},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where c_id = #{cId}
+    </update>
+
+    <delete id="deleteBLeaveById" parameterType="String">
+        delete from b_leave where c_id = #{cId}
+    </delete>
+
+    <delete id="deleteBLeaveByIds" parameterType="String">
+        delete from b_leave where c_id in 
+        <foreach item="cId" collection="array" open="(" separator="," close=")">
+            #{cId}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geely.project.supplier.mapper.BSupplierMapper">
+
+    <resultMap type="BSupplier" id="BSupplierResult">
+        <result property="sId"    column="s_id"    />
+        <result property="sName"    column="s_name"    />
+        <result property="sNumber"    column="s_number"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="checkType"    column="check_type"    />
+        <result property="busType"    column="bus_type"    />
+        <result property="subjectMatter"    column="subject_matter"    />
+        <result property="status"    column="status"    />
+        <result property="counterpartName"    column="counterpart_name"    />
+        <result property="counterpartNumber"    column="counterpart_number"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBSupplierVo">
+        select s_id, s_name, s_number, start_date, end_date, check_type, bus_type, subject_matter, status, counterpart_name, counterpart_number, create_time, update_time, create_by, update_by, remark from b_supplier
+    </sql>
+
+    <select id="selectBSupplierList" parameterType="BSupplier" resultMap="BSupplierResult">
+        <include refid="selectBSupplierVo"/>
+        <where>
+            <if test="sName != null  and sName != ''"> and s_name like concat('%', #{sName}, '%')</if>
+            <if test="sNumber != null  and sNumber != ''"> and s_number = #{sNumber}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="checkType != null  and checkType != ''"> and check_type = #{checkType}</if>
+            <if test="busType != null  and busType != ''"> and bus_type = #{busType}</if>
+            <if test="subjectMatter != null  and subjectMatter != ''"> and subject_matter = #{subjectMatter}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="counterpartName != null  and counterpartName != ''"> and counterpart_name like concat('%', #{counterpartName}, '%')</if>
+            <if test="counterpartNumber != null  and counterpartNumber != ''"> and counterpart_number = #{counterpartNumber}</if>
+        </where>
+    </select>
+
+    <select id="selectBSupplierById" parameterType="String" resultMap="BSupplierResult">
+        <include refid="selectBSupplierVo"/>
+        where s_id = #{sId}
+    </select>
+
+    <insert id="insertBSupplier" parameterType="BSupplier">
+        insert into b_supplier
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sId != null  and sId != ''">s_id,</if>
+            <if test="sName != null  and sName != ''">s_name,</if>
+            <if test="sNumber != null  and sNumber != ''">s_number,</if>
+            <if test="startDate != null ">start_date,</if>
+            <if test="endDate != null ">end_date,</if>
+            <if test="checkType != null  and checkType != ''">check_type,</if>
+            <if test="busType != null  and busType != ''">bus_type,</if>
+            <if test="subjectMatter != null  and subjectMatter != ''">subject_matter,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="counterpartName != null  and counterpartName != ''">counterpart_name,</if>
+            <if test="counterpartNumber != null  and counterpartNumber != ''">counterpart_number,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sId != null  and sId != ''">#{sId},</if>
+            <if test="sName != null  and sName != ''">#{sName},</if>
+            <if test="sNumber != null  and sNumber != ''">#{sNumber},</if>
+            <if test="startDate != null ">#{startDate},</if>
+            <if test="endDate != null ">#{endDate},</if>
+            <if test="checkType != null  and checkType != ''">#{checkType},</if>
+            <if test="busType != null  and busType != ''">#{busType},</if>
+            <if test="subjectMatter != null  and subjectMatter != ''">#{subjectMatter},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="counterpartName != null  and counterpartName != ''">#{counterpartName},</if>
+            <if test="counterpartNumber != null  and counterpartNumber != ''">#{counterpartNumber},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBSupplier" parameterType="BSupplier">
+        update b_supplier
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sName != null  and sName != ''">s_name = #{sName},</if>
+            <if test="sNumber != null  and sNumber != ''">s_number = #{sNumber},</if>
+            <if test="startDate != null ">start_date = #{startDate},</if>
+            <if test="endDate != null ">end_date = #{endDate},</if>
+            <if test="checkType != null  and checkType != ''">check_type = #{checkType},</if>
+            <if test="busType != null  and busType != ''">bus_type = #{busType},</if>
+            <if test="subjectMatter != null  and subjectMatter != ''">subject_matter = #{subjectMatter},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="counterpartName != null  and counterpartName != ''">counterpart_name = #{counterpartName},</if>
+            <if test="counterpartNumber != null  and counterpartNumber != ''">counterpart_number = #{counterpartNumber},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where s_id = #{sId}
+    </update>
+
+    <delete id="deleteBSupplierById" parameterType="String">
+        delete from b_supplier where s_id = #{sId}
+    </delete>
+
+    <delete id="deleteBSupplierByIds" parameterType="String">
+        delete from b_supplier where s_id in
+        <foreach item="sId" collection="array" open="(" separator="," close=")">
+            #{sId}
+        </foreach>
+    </delete>
+
+</mapper>

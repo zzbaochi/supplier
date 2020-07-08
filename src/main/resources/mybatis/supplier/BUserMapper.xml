@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geely.project.supplier.mapper.BUserMapper">
+
+    <resultMap type="BUser" id="BUserResult">
+        <result property="userId"    column="user_id"    />
+        <result property="userNumber"    column="user_number"    />
+        <result property="sNumber"    column="s_number"    />
+        <result property="userName"    column="user_name"    />
+        <result property="userAccount"    column="user_account"    />
+        <result property="cardNumber"    column="card_number"    />
+        <result property="phone"    column="phone"    />
+        <result property="gender"    column="gender"    />
+        <result property="age"    column="age"    />
+        <result property="nativePlace"    column="native_place"    />
+        <result property="numberId"    column="number_id"    />
+        <result property="address"    column="address"    />
+        <result property="status"    column="status"    />
+        <result property="education"    column="education"    />
+        <result property="graduate"    column="graduate"    />
+        <result property="graduationTime"    column="graduation_time"    />
+        <result property="major"    column="major"    />
+        <result property="workYears"    column="work_years"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBUserVo">
+        select user_id, user_number, s_number, user_name, user_account, card_number, phone, gender, age, native_place, number_id, address, status, education, graduate, graduation_time, major, work_years, create_time, update_time, create_by, update_by, remark from b_user
+    </sql>
+
+    <select id="selectBUserList" parameterType="BUser" resultMap="BUserResult">
+        <include refid="selectBUserVo"/>
+        <where>
+            <if test="userNumber != null  and userNumber != ''"> and user_number = #{userNumber}</if>
+            <if test="sNumber != null  and sNumber != ''"> and s_number = #{sNumber}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="userAccount != null  and userAccount != ''"> and user_account = #{userAccount}</if>
+            <if test="cardNumber != null  and cardNumber != ''"> and card_number = #{cardNumber}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="nativePlace != null  and nativePlace != ''"> and native_place = #{nativePlace}</if>
+            <if test="numberId != null  and numberId != ''"> and number_id = #{numberId}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="graduate != null  and graduate != ''"> and graduate = #{graduate}</if>
+            <if test="graduationTime != null "> and graduation_time = #{graduationTime}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="workYears != null  and workYears != ''"> and work_years = #{workYears}</if>
+        </where>
+    </select>
+
+    <select id="selectBUserById" parameterType="String" resultMap="BUserResult">
+        <include refid="selectBUserVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertBUser" parameterType="BUser">
+        insert into b_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userNumber != null  and userNumber != ''">user_number,</if>
+            <if test="sNumber != null  and sNumber != ''">s_number,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="userAccount != null  and userAccount != ''">user_account,</if>
+            <if test="cardNumber != null  and cardNumber != ''">card_number,</if>
+            <if test="phone != null  and phone != ''">phone,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="age != null  and age != ''">age,</if>
+            <if test="nativePlace != null  and nativePlace != ''">native_place,</if>
+            <if test="numberId != null  and numberId != ''">number_id,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="education != null  and education != ''">education,</if>
+            <if test="graduate != null  and graduate != ''">graduate,</if>
+            <if test="graduationTime != null ">graduation_time,</if>
+            <if test="major != null  and major != ''">major,</if>
+            <if test="workYears != null  and workYears != ''">work_years,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userNumber != null  and userNumber != ''">#{userNumber},</if>
+            <if test="sNumber != null  and sNumber != ''">#{sNumber},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="userAccount != null  and userAccount != ''">#{userAccount},</if>
+            <if test="cardNumber != null  and cardNumber != ''">#{cardNumber},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="age != null  and age != ''">#{age},</if>
+            <if test="nativePlace != null  and nativePlace != ''">#{nativePlace},</if>
+            <if test="numberId != null  and numberId != ''">#{numberId},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="education != null  and education != ''">#{education},</if>
+            <if test="graduate != null  and graduate != ''">#{graduate},</if>
+            <if test="graduationTime != null ">#{graduationTime},</if>
+            <if test="major != null  and major != ''">#{major},</if>
+            <if test="workYears != null  and workYears != ''">#{workYears},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBUser" parameterType="BUser">
+        update b_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userNumber != null  and userNumber != ''">user_number = #{userNumber},</if>
+            <if test="sNumber != null  and sNumber != ''">s_number = #{sNumber},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="userAccount != null  and userAccount != ''">user_account = #{userAccount},</if>
+            <if test="cardNumber != null  and cardNumber != ''">card_number = #{cardNumber},</if>
+            <if test="phone != null  and phone != ''">phone = #{phone},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="age != null  and age != ''">age = #{age},</if>
+            <if test="nativePlace != null  and nativePlace != ''">native_place = #{nativePlace},</if>
+            <if test="numberId != null  and numberId != ''">number_id = #{numberId},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="education != null  and education != ''">education = #{education},</if>
+            <if test="graduate != null  and graduate != ''">graduate = #{graduate},</if>
+            <if test="graduationTime != null ">graduation_time = #{graduationTime},</if>
+            <if test="major != null  and major != ''">major = #{major},</if>
+            <if test="workYears != null  and workYears != ''">work_years = #{workYears},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteBUserById" parameterType="String">
+        delete from b_user where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteBUserByIds" parameterType="String">
+        delete from b_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <select id="searchUserinfor" parameterType="Map" resultType="com.geely.project.supplier.domain.bo.UserInforBO">
+        SELECT
+            b.user_id AS uid,
+	        b.user_name AS userName,
+	        b.user_number AS userNumber,
+	        b.phone AS phone,
+	        f.department AS department,
+	        f.is_card as isCard,
+	        f.is_caliche as isCaliche
+        FROM
+	        b_user b
+        LEFT JOIN b_first_handle f ON b.user_id = f.u_id
+        WHERE
+	        b.user_number = #{paramsMap.userNumber}
+        AND b.s_number = #{paramsMap.sNumber}
+    </select>
+    <select id="getUserNumberMax" resultType="string">
+        SELECT
+	        b.user_number AS user_number
+        FROM
+	        b_user b
+        ORDER BY
+	        b.user_number DESC
+            LIMIT 1;
+    </select>
+
+
+
+
+
+</mapper>

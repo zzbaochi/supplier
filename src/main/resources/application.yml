@@ -1,0 +1,146 @@
+# 项目相关配置
+geely:
+  # 名称
+  name: suppplier
+  # 版本
+  version: 2.2.0
+  # 版权年份
+  copyrightYear: 2019
+  # 实例演示开关
+  demoEnabled: true
+  # 文件路径 示例（ Windows配置D:/geely/uploadPath，Linux配置 /home/geely/uploadPath）
+  profile: D:/geely/uploadPath
+  # 获取ip地址开关
+  addressEnabled: false
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8899
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+# 日志配置
+logging:
+  level:
+    com.geely: debug
+    org.springframework: warn
+
+# Spring配置
+spring:
+  mvc: # 默认是i18n（中文/中国）
+    locale: en_US
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+    encoding: UTF-8
+    cache-duration: 1 # 设置缓存时间，2.2.1是s为单位，之前版本才是毫秒
+  profiles: 
+    active: druid
+  # 文件上传
+  servlet:
+     multipart:
+       # 单个文件大小
+       max-file-size:  10MB
+       # 设置总上传的文件大小
+       max-request-size:  20MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+  # redis 配置
+  redis:
+    # 地址
+    host: 10.190.71.182
+    # 端口，默认为6379
+    port: 6379
+    # 密码
+    #password:
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+  # es 配置
+#  data:
+#    elasticsearch:
+#      cluster-name: elasticsearch
+#      cluster-nodes: 10.190.71.182:9300
+#  main:
+#    allow-bean-definition-overriding: true #表示后发现的bean会覆盖之前相同名称的bean,这样可以了
+
+
+# token配置
+token:
+    # 令牌自定义标识
+    header: Authorization
+    # 令牌秘钥
+    secret: abcdefghijklmnopqrstuvwxyz
+    # 令牌有效期（默认30分钟）
+    expireTime: 30
+  
+# MyBatis配置
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: com.geely.project.**.domain
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath*:mybatis/**/*Mapper.xml
+    # 加载全局的配置文件
+    configLocation: classpath:mybatis/mybatis-config.xml
+
+
+# PageHelper分页插件
+pagehelper: 
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql 
+
+# Swagger配置
+swagger:
+  enable: true
+
+# 防止XSS攻击
+xss: 
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*,/supplier/*
+  
+# 代码生成
+gen:
+  # 作者
+  author: zhanzhu
+  # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
+  packageName: com.geely.project.supplier
+  # 自动去除表前缀，默认是true
+  autoRemovePre: false
+  # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
+  tablePrefix: sys_
+
+system:
+  user:
+    key: CURRENT_MAX_USER_CODE_KEY # 用户编号锁存在redis中 key
+    lock: USER_CODE_INC_LOCK  # 获取用户编号锁
+  supplier:
+    key: CURRENT_MAX_SUPPLIER_CODE_KEY # 供应商编码存在redis中 key
+    lock: SUPPLIER_CODE_INC_LOCK  # 获取供应商编号锁
