@@ -11,11 +11,11 @@ springboot vue 前后端分离项目。Java实现的权限管理，用户，角�
 
 1、前端代码可以参考，
 
-2、后端代码也是参考前端大神开源的框架，自己整合了，实现限流，分布式id生产、敏感词过滤：
+2、后端代码也是参考前端大神开源的框架，自己整合了，实现限流，分布式id生产、敏感词过滤、使用redis分布式锁实现编号按照某个规则生产等等 ：
 
 3、实现限流：参考地址：https://blog.csdn.net/u014373554/article/details/106799201
 
 4、实现敏感词过滤：参考地址：https://blog.csdn.net/u014373554/article/details/107182944
 
-5、分布式
+5、基于Redis的redisson框架实现分布式单号，按照有序生成分布式ID（自定义规则生成）参数地址：https://blog.csdn.net/u014373554/article/details/107076636
 
